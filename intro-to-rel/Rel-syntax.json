@@ -1,0 +1,363 @@
+{
+  "cells": [
+    {
+      "id": "1ad86a81-d97e-4325-b5ec-af17e1b43d1f",
+      "inputs": [
+      ],
+      "isCodeFolded": true,
+      "source": "# Rel Onboarding: Rel Syntax\n\nWelcome to the Rel workshop! In this class we'll be learning the basics of the Rel language. Remember if you have any questions, you can ask the instructor for help.\n\nOutline:\n- Data types\n- Tuples\n- Relations\n- Relation Abstraction\n- Relation Application",
+      "type": "markdown"
+    },
+    {
+      "id": "68dc2eaa-e3d9-4f3c-8f54-eb9e138a416c",
+      "inputs": [
+      ],
+      "isCodeFolded": true,
+      "name": "",
+      "source": "## Data Types\n\nWe have basic data types like strings, numbers, dates, ....\n\nYou can see all of the data types (including the ones we are not covering in this workshop) [here](https://docs.relational.ai/rel/ref/data-types/).",
+      "type": "markdown"
+    },
+    {
+      "id": "b7f14dde-18c3-401f-a33f-e9c4efd8a403",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "def output = 1",
+      "type": "query"
+    },
+    {
+      "id": "24f567a7-be36-48d1-870f-5e17f2588216",
+      "inputs": [
+      ],
+      "isCodeFolded": true,
+      "name": "",
+      "source": "The statement `def output = ...` defines what result are shown.",
+      "type": "markdown"
+    },
+    {
+      "id": "655352fd-8c83-4bb7-91c0-8831619acd30",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// string values\ndef output = \"alice\"",
+      "type": "query"
+    },
+    {
+      "id": "3e868b10-7c65-4ec3-a959-0b90ef95eb30",
+      "inputs": [
+      ],
+      "isCodeFolded": true,
+      "name": "",
+      "source": "The math operators `+-*/` work as you'd expect.",
+      "type": "markdown"
+    },
+    {
+      "id": "7afcf5cb-82e1-4499-abbe-b3701001a8c3",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "def output = 15 + 17",
+      "type": "query"
+    },
+    {
+      "id": "67aa5311-75f8-4747-a6a7-fd437f470884",
+      "inputs": [
+      ],
+      "isCodeFolded": true,
+      "name": "",
+      "source": "## Tuples\n\nRel has tuples, which are ordered collection of data values.",
+      "type": "markdown"
+    },
+    {
+      "id": "7b99aec1-7f36-4fe9-8af7-ac845764325e",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// Here's a tuple!\ndef output = (1, 1)",
+      "type": "query"
+    },
+    {
+      "id": "f01dcb12-f141-485d-9269-587f817b31dc",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// you can have different data types in the same tuple\ndef output = (1, \"a\")",
+      "type": "query"
+    },
+    {
+      "id": "3e7268d8-00a6-4921-8199-2f63bb112f2d",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// you can have multiple values in the same tutple, since it's ordered\ndef output = (1, 1, 1, 1, 1, 1, 1, 1, 1)",
+      "type": "query"
+    },
+    {
+      "id": "7eab830e-7fc3-48bd-8e8c-7198a3c4fa11",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// in fact, a tuple of one value is just... a value!\ndef output = (1,     )",
+      "type": "query"
+    },
+    {
+      "id": "e3bfe9f8-9e9e-4d7e-959e-323aecbdf75c",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// And we can use it like a value!\ndef output = (1,    ) + 2",
+      "type": "query"
+    },
+    {
+      "id": "8994d0d7-63be-4b3a-a085-83c30b0c2a78",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// this is not okay though\ndef output = (,1)",
+      "type": "query"
+    },
+    {
+      "id": "8f0b0823-e834-4bf4-a777-8c726e81da52",
+      "inputs": [
+      ],
+      "isCodeFolded": true,
+      "name": "",
+      "source": "## Relations (The Heart of Rel)\n\nA relation is a set of tuples.\n\nReminder: A set is an unordered collection of unique entries.\n\nMultiple entries in a relation are delimited with **semicolons**. You can also wrap the whole set in braces (`{}`).\n\nA relation can be defined with `def R = ...` where `R` is the name of the relation.\n\nAs you noticed, we already used relations quite heavily with `def output = `.\nThe relation `output` has a special purpose as it informs the RKGMS which data to return.",
+      "type": "markdown"
+    },
+    {
+      "id": "7bea7a56-c6d6-4d1f-8ac2-b691f02e7892",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// And you can have collections of tuples, or \"relations\".\ndef classes = {\n  (\"alice\", \"bio\");\n  (\"bob\", \"bio\");\n  (\"carol\", \"math\");\n  (\"carol\", \"econ\");\n  (\"dave\", \"econ\");\n  (\"dave\", \"bio\");\n}\n\ndef output = classes",
+      "type": "query"
+    },
+    {
+      "id": "8c88561a-a487-4808-9ce0-8b642f91fb3c",
+      "inputs": [
+      ],
+      "isCodeFolded": false,
+      "name": "",
+      "source": "Tuples in a relation do *not* need to have all the same arity or data types.\n\nFor instance, a relation can be a collection of strings and numbers.",
+      "type": "markdown"
+    },
+    {
+      "id": "106fe60f-0081-4b4c-a2dc-82f16d5bff2d",
+      "name": "",
+      "source": "",
+      "type": "query"
+    },
+    {
+      "id": "531619f4-4aae-4b32-b2b3-68b5486f92d2",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// But you can't have tuples of collections!\n// It'll be expanded to multiple tuples.\n\ndef output = (1, {2; 3})\ndef output = {(1, 2) ; (1, 3)}",
+      "type": "query"
+    },
+    {
+      "id": "7e767423-97e3-4bd9-a932-36afaad64ecc",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// Same as writing\ndef output = {(1, 2) ; (1, 3)}",
+      "type": "query"
+    },
+    {
+      "id": "ad7466ff-8aa8-45d5-99c6-baa7f01bfc80",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "\n## Collections / Relations TODO find the right names\n\nWe can also have *sets* of values. Multiple values in the set are delimited with **semicolons**. You can also wrap the whole set in braces (`{}`).\n\nCollections do *not* have to all be the same datatype! Youi can have a collection of stringsd and numbers. Notice how the output separates the two types of values.",
+      "type": "markdown"
+    },
+    {
+      "id": "f921bbc7-818e-43ac-8442-7244c0ee624c",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "def students = {\"Alice\"; \"Bob\"; \"Carol\"}\ndef students_and_numbers = students ; 3\n\ndef output = students_and_numbers",
+      "type": "query"
+    },
+    {
+      "id": "3fca6396-9aeb-4434-a73f-09e2dd717cb6",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// sets are unique. Adding the value twice doesn't add it twice.\ndef names = {\"Alice\"; \"Alice\"; \"Bob\"}\n\n// If you define the same value twice, the definitions are added together.\ndef names = {\"Alice\"; \"Carol\"}\n\n// notice how \"Alice\" and \"Bob\" each show in the output ONCE.\ndef output = names",
+      "type": "query"
+    },
+    {
+      "id": "d6335d2f-38c8-42a5-ab5c-565ef171bcda",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// Collections are \"top-level\": you cannot put a collection in another collection.\\\n// If you try, Rel will \"expand\" the set.\n\ndef output = {1; {2; 3}; 4}",
+      "type": "query"
+    },
+    {
+      "id": "09e24990-09d6-4878-ad58-05cc3eaf72cb",
+      "name": "",
+      "source": "",
+      "type": "markdown"
+    },
+    {
+      "id": "a0b24cd6-2a1a-4ce8-93f0-676eadd16a3a",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "def classes = {\n  (\"alice\", \"bio\");\n  (\"bob\", \"bio\");\n  (\"carol\", \"math\");\n  (\"carol\", \"econ\");\n  (\"dave\", \"econ\");\n  (\"dave\", \"bio\");\n}\n\n// Does alice have bio class?\ndef output = classes(\"alice\", \"bios\")",
+      "type": "query"
+    },
+    {
+      "id": "76b5dd63-ca57-4be0-ae2f-fa1d4622b3af",
+      "name": "",
+      "source": "",
+      "type": "query"
+    },
+    {
+      "id": "8e0a6f4e-9176-4e9d-b28c-87498b9dd5c6",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "//If the answer is FALSE, then there's no output.\n\ndef output = school_class(\"bob\", 1234534543)",
+      "type": "query"
+    },
+    {
+      "id": "d8ae7d2a-4d67-40d9-b738-c1fca9b8c3c2",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// We can use an underscore for \"any value\".\n\n// Is ANYONE taking bio?\ndef output = school_class(_, \"bio\")",
+      "type": "query"
+    },
+    {
+      "id": "a994f4c7-c528-4886-9f72-ca3cd5f151b6",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// underscore is useful if you have a larger relation.\n\ndef grades = (\"alice\", \"bio\", 70)\n\n// Does Alice have a grade in bio?\ndef output = grades(\"alice\", \"bio\", _)",
+      "type": "query"
+    },
+    {
+      "id": "d8613480-cfd1-46bd-92d6-e0b4723cba6d",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "## Relational Abstractions\n\nOnce we have relations, we want to be able to do things with relations! TODO\n\n\n> Do we introduce installing here?",
+      "type": "markdown"
+    },
+    {
+      "id": "6abaabf0-689d-4261-97d4-1a7842be48ca",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "def classes = {\n  (\"alice\", \"bio\");\n  (\"bob\", \"bio\");\n  (\"carol\", \"math\");\n  (\"carol\", \"econ\");\n  (\"dave\", \"econ\");\n  (\"dave\", \"bio\");\n}\n\ndef bio_classroom = x: classes(x, \"bio\")\n\ndef output = bio_classroom",
+      "type": "query"
+    },
+    {
+      "id": "22b5226b-81a8-4159-b8a9-df14f077d7b3",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "//we have to rewrite the relation each time, which is lame\ndef output  = x: classes(x, \"bio\")\n\n//time to introduce install cells!",
+      "type": "query"
+    },
+    {
+      "id": "89b2f421-41ec-41a2-b7aa-1abaec64f544",
+      "inputs": [
+      ],
+      "name": "classes-model-1",
+      "source": "## Install Cells\n\nGoing forward we'll call it `data_class`, like the naming convention.\n\n> We wanted to call it data:class, but that would confuse people with the relational abstraction ",
+      "type": "markdown"
+    },
+    {
+      "id": "860502bd-3825-4ac1-b094-6e2c3758a912",
+      "inputs": [
+      ],
+      "name": "classes-model-2",
+      "source": "",
+      "type": "install"
+    },
+    {
+      "id": "91c03499-3ac5-497b-93dd-f39e767430b9",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// now this works\ndef output  = x: school_class(x, \"bio\")\n",
+      "type": "query"
+    },
+    {
+      "id": "905f26ac-085e-46ba-96d9-a2fadb4853a5",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "def grades = {\n(\"alice\", \"bio\", 50);\n(\"alice\", \"econ\", 71)\n}\n\n// What classes is alice doing above a 70 in?\ndef output = class, grade: grade > 70 and grades(\"alice\", class, grade)\n",
+      "type": "query"
+    },
+    {
+      "id": "46fb4326-3627-4e25-b435-ccd8f6928367",
+      "name": "",
+      "source": "",
+      "type": "query"
+    },
+    {
+      "id": "48cfdf18-e00d-44e7-a99c-e2e1dfe3cea0",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "## Formula\n\nWe can also rewrite the above by moving the abstraction to the left-hand side. Almost like it's a programming function!\n\nIf you do this, the right-hand side **must** evaluate to a boolean. It can't evaluate to a relation, that's not allowed.",
+      "type": "markdown"
+    },
+    {
+      "id": "c28d9567-7f84-41c1-a000-a3b434ba6f1f",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "def classrooms(class, person) = school_class(person, class)\n\ndef output = classrooms",
+      "type": "query"
+    },
+    {
+      "id": "c57fa20e-ffb8-4926-9dd7-619d6323559b",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "// TODO maybe we shouldn't discuss this?\n// You can't do this, though:\ndef classrooms(\"bio\") = \"alice\"\n\ndef output = add(2, 3)",
+      "type": "query"
+    },
+    {
+      "id": "d46460c2-9d05-41b2-9e60-851d9417783c",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "## Unbound Relations",
+      "type": "markdown"
+    },
+    {
+      "id": "ce5cef38-1860-4f19-af7b-d547464a9846",
+      "name": "",
+      "source": "",
+      "type": "query"
+    },
+    {
+      "id": "4c15d30c-a826-42d7-89f7-4969b498e4e9",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "## Application\n\nThis is where we introduce `[]`",
+      "type": "markdown"
+    },
+    {
+      "id": "22263773-e7dd-4afb-9909-51b27f6aa74b",
+      "inputs": [
+      ],
+      "name": "",
+      "source": "/*\n\ndef bio_classroom = person: classes(person, \"bio\")\ndef output[:a] = classrooms\n\ndef mutuals = x, y: exists(z: classes(x, z) and classes(y, z))\n\ndef output[:b] = mutuals\n\ndef scores = {\n  (\"alice\", \"bio\", 10);\n  (\"bob\", \"bio\", 9);\n  (\"carol\", \"bio\", 12);\n  (\"alice\", \"econ\", 11);\n}\n\ndef incomplete(person, class) = classes(person, class) and not scores(person, class, _)\n// Do you have a score in a class you didn't take?\n//def output[:c] = class: top[2, (scores[user, class], user from user)]\n//def output[:c] = user: top[2, (scores[user, class], class from class)]\n//def output[:c] = user: top[2, (s, c: scores(user, c, s))]\ndef output[:d] = c, top[2, scores[u, c]] from u, c\n\n//def output[:c] = top[3, (scores[user, class], user, class from user, class)]\n\n/*\nThis \ndef classes = {\n\t(1, :person, \"alice\");\n    (1, :class, \"bio\");\n    (1, :score, 11);\n}\n\ndef classes[1] = {\n\t(:person, \"alice\");\n    (:class, \"bio\");\n    (:score, 11);\n}\n\ndef incomplete(person, class) = classes(class, :person, person) and not classes(classes, :score, _)\n */",
+      "type": "query"
+    }
+  ],
+  "metadata": {
+    "notebookFormatVersion": "0.0.1"
+  }
+}
